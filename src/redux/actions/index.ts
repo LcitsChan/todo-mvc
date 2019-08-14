@@ -1,13 +1,6 @@
-import { AnyAction } from "redux";
 import * as TodoTypes from '../constants/ActionTypes'
-import { Todo } from '../../model'
+import { Todo, TodosState } from '../../model'
 import { createAction } from 'redux-actions' 
-
-// To be compared
-interface AddTodoAction extends AnyAction {
-  type: typeof TodoTypes.ADD_TODO,
-  todo: Todo
-}
 
 export const _addTodo = (text: string) => {
   return ({
@@ -29,5 +22,10 @@ export const deleteTodo = createAction<Todo, Todo>(
 export const completeTodo = createAction<Todo, Todo>(
   TodoTypes.COMPLETE_TODO,
   (todo: Todo) => todo
+)
+
+export const setTodos = createAction<TodosState, TodosState>(
+  TodoTypes.SET_TODO,
+  (todos: TodosState) => todos
 )
 

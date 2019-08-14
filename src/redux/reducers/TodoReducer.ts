@@ -1,11 +1,17 @@
-import { Todo, TodosState } from '../../model'
+import { TodosState } from '../../model'
 import * as TodoTypes from '../constants/ActionTypes'
-import { handleActions, Action } from "redux-actions";
+import { handleActions } from "redux-actions";
 
 const initialState: TodosState = []
 
-export const todoReducer = handleActions<TodosState, Todo>({
-  [TodoTypes.ADD_TODO]: (state: TodosState, action: Action<Todo>): TodosState => {
+export const todoReducer = handleActions<TodosState, any>({
+  [TodoTypes.SET_TODO]: (state, action) => {
+    if (action.payload === undefined) {
+      return state;
+    }
+    return action.payload;
+  },
+  [TodoTypes.ADD_TODO]: (state, action) => {
     return [
       {
         id: state.reduce((maxId, todo) => Math.max(todo.id!, maxId), -1) + 1,
@@ -15,13 +21,13 @@ export const todoReducer = handleActions<TodosState, Todo>({
       ...state]
   },
 
-  [TodoTypes.DELETE_TODO]: (state: TodosState, action: Action<Todo>): TodosState => {
-     return state.filter(
+  [TodoTypes.DELETE_TODO]: (state, action) => {
+    return state.filter(
       todo => todo.id !== action.payload.id
     );
   },
 
-  [TodoTypes.COMPLETE_TODO]: (state: TodosState, action: Action<Todo>): TodosState => {
+  [TodoTypes.COMPLETE_TODO]: (state, action) => {
     return state.map(
       (todo) => {
         if (todo.id === action.payload.id) {
@@ -30,5 +36,5 @@ export const todoReducer = handleActions<TodosState, Todo>({
         return todo
       }
     );
- }
+  }
 }, initialState)
