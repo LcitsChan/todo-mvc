@@ -8,33 +8,28 @@ export interface TodoListProps {
   completedTodo: (todo: Todo) => void;
 }
 
-export interface TodoListState {
-
-}
+export interface TodoListState {}
 
 class TodoList extends React.Component<TodoListProps, TodoListState> {
-
   render() {
     const { deleteTodo, completedTodo, todos } = this.props;
     return (
       <ul>
-        {
-          todos.map(
-            (todo, idx) => (
-              <TodoItem
-                todo={todo}
-                deleteTodo={deleteTodo}
-                completedTodo={completedTodo}
-                key={idx} />)
-          )
-        }
+        {todos.map((todo, idx) => (
+          <TodoItem
+            todo={todo}
+            deleteTodo={deleteTodo}
+            completedTodo={completedTodo}
+            key={idx}
+          />
+        ))}
       </ul>
     );
   }
 }
 
 // {
-//   todos.map((todo) => 
+//   todos.map((todo) =>
 //     (<TodoItem todo={todo} />))
 // }
 

@@ -7,18 +7,15 @@ export interface TodoItemProps {
   completedTodo: (todo: Todo) => void;
 }
 
-export interface TodoItemState {
-
-}
+export interface TodoItemState {}
 
 class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
-
   handleDelete(todo: Todo) {
-    this.props.deleteTodo(todo)
+    this.props.deleteTodo(todo);
   }
 
   handleComplete(todo: Todo) {
-    this.props.completedTodo(todo)
+    this.props.completedTodo(todo);
   }
 
   render() {
@@ -27,9 +24,9 @@ class TodoItem extends React.Component<TodoItemProps, TodoItemState> {
       <li>
         <div>
           <label
-            onClick={ this.props.completedTodo.bind(this, todo) } 
+            onClick={this.props.completedTodo.bind(this, todo)}
             style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-            >
+          >
             {todo.text}
           </label>
           <button onClick={this.handleDelete.bind(this, todo)}>删除</button>
