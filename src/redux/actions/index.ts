@@ -1,13 +1,7 @@
-import * as TodoTypes from '../constants/ActionTypes'
-import { Todo, TodosState } from '../../model'
-import { createAction } from 'redux-actions' 
+import * as TodoTypes from '../constants/ActionTypes';
+import { Todo, TodosState } from '../../model';
+import { createAction } from 'redux-actions';
 
-export const _addTodo = (text: string) => {
-  return ({
-    type: typeof TodoTypes.ADD_TODO,
-    todo: { text, compared: false } 
-  })
-}
 
 export const addTodo = createAction<Todo, string>(
   TodoTypes.ADD_TODO,
