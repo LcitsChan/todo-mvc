@@ -2,6 +2,7 @@ import React from 'react';
 
 export interface AddTodoProps {
   addTodo: (test: string) => void;
+  completeAll: () => void;
 }
 
 export interface AddTodoState {}
@@ -17,13 +18,16 @@ class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
 
   render() {
     return (
-      <input
-        className="new-todo"
-        type="text"
-        placeholder="Enter your todo thing"
-        autoFocus={true}
-        onKeyDown={this.handleSubmit.bind(this)}
-      />
+      <div>
+        <button onClick={this.props.completeAll}>all</button>
+        <input
+          className="new-todo"
+          type="text"
+          placeholder="Enter your todo thing"
+          autoFocus={true}
+          onKeyDown={this.handleSubmit.bind(this)}
+        />
+      </div>
     );
   }
 }

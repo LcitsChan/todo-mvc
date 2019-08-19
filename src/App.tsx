@@ -3,7 +3,12 @@ import './App.css';
 import AddTodo from './components/AddTodo';
 import { connect } from 'react-redux';
 import { Dispatch, AnyAction } from 'redux';
-import { addTodo, deleteTodo, completeTodo } from './redux/actions';
+import {
+  addTodo,
+  deleteTodo,
+  completeTodo,
+  completeAllTodos
+} from './redux/actions';
 import TodoList from './components/TodoList';
 import { TodosState, TodoAppState } from './model';
 
@@ -19,7 +24,11 @@ class App extends React.Component<AppProps, AppState> {
     const { todos, dispatch } = this.props;
     return (
       <div className="App">
-        <AddTodo addTodo={text => dispatch(addTodo(text))} />
+        <h1>Todo MVC</h1>
+        <AddTodo
+          addTodo={text => dispatch(addTodo(text))}
+          completeAll={() => dispatch(completeAllTodos())}
+        />
         <TodoList
           todos={todos}
           deleteTodo={todo => dispatch(deleteTodo(todo))}

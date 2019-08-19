@@ -21,3 +21,8 @@ export const setTodos = createAction<TodosState, TodosState>(
   TodoTypes.SET_TODO,
   (todos: TodosState) => todos
 );
+
+export const completeAllTodos = createAction<void>(
+  TodoTypes.COMPLETE_ALL,
+  () => {}
+);

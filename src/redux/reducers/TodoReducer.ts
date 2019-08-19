@@ -34,6 +34,18 @@ export const todoReducer = handleActions<TodosState, any>(
         }
         return todo;
       });
+    },
+
+    [TodoTypes.COMPLETE_ALL]: (state, action) => {
+      const allComplete = state.every(todo => todo.completed);
+      return state.map(todo => ({
+        ...todo,
+        completed: !allComplete
+      }));
+    },
+
+    [TodoTypes.CLEAR_COMPLETED]: (state, action) => {
+      return state.filter(todo => todo.completed === false);
     }
   },
   initialState
