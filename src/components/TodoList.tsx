@@ -15,12 +15,12 @@ class TodoList extends React.Component<TodoListProps, TodoListState> {
     const { deleteTodo, completedTodo, todos } = this.props;
     return (
       <ul>
-        {todos.map((todo, idx) => (
+        {todos.map(todo => (
           <TodoItem
             todo={todo}
             deleteTodo={deleteTodo}
             completedTodo={completedTodo}
-            key={idx}
+            key={todo.id}
           />
         ))}
       </ul>

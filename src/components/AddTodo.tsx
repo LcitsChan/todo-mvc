@@ -3,6 +3,7 @@ import React from 'react';
 export interface AddTodoProps {
   addTodo: (test: string) => void;
   completeAll: () => void;
+  isEmpty: boolean;
 }
 
 export interface AddTodoState {}
@@ -19,7 +20,9 @@ class AddTodo extends React.Component<AddTodoProps, AddTodoState> {
   render() {
     return (
       <div>
-        <button onClick={this.props.completeAll}>all</button>
+        <button onClick={this.props.completeAll}>
+          {this.props.isEmpty ? '' : 'all'}
+        </button>
         <input
           className="new-todo"
           type="text"

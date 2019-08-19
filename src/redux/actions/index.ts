@@ -26,3 +26,8 @@ export const completeAllTodos = createAction<void>(
   TodoTypes.COMPLETE_ALL,
   () => {}
 );
+
+export const clearCompleted = createAction<void>(
+  TodoTypes.CLEAR_COMPLETED,
+  () => {}
+);

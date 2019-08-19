@@ -7,10 +7,12 @@ import {
   addTodo,
   deleteTodo,
   completeTodo,
-  completeAllTodos
+  completeAllTodos,
+  clearCompleted
 } from './redux/actions';
 import TodoList from './components/TodoList';
 import { TodosState, TodoAppState } from './model';
+import Archive from './components/Archive';
 
 export interface AppProps {
   todos: TodosState;
@@ -26,6 +28,7 @@ class App extends React.Component<AppProps, AppState> {
       <div className="App">
         <h1>Todo MVC</h1>
         <AddTodo
+          isEmpty={todos.length === 0}
           addTodo={text => dispatch(addTodo(text))}
           completeAll={() => dispatch(completeAllTodos())}
         />
@@ -34,6 +37,7 @@ class App extends React.Component<AppProps, AppState> {
           deleteTodo={todo => dispatch(deleteTodo(todo))}
           completedTodo={todo => dispatch(completeTodo(todo))}
         />
+        <Archive clearCompleted={() => dispatch(clearCompleted())} />
       </div>
     );
   }
