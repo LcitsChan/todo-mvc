@@ -10,11 +10,17 @@ import {
   completeAllTodos,
   clearCompleted
 } from './redux/actions';
+import {
+  showAll,
+  showActive,
+  showCompleted
+} from './redux/actions/FilterActions';
 import TodoList from './components/TodoList';
 import { TodosState, TodoAppState } from './model';
 import Archive from './components/Archive';
 
 export interface AppProps {
+  visibility: string;
   todos: TodosState;
   dispatch: Dispatch<AnyAction>;
 }
@@ -23,7 +29,7 @@ export interface AppState {}
 
 class App extends React.Component<AppProps, AppState> {
   render() {
-    const { todos, dispatch } = this.props;
+    const { visibility, todos, dispatch } = this.props;
     return (
       <div className="App">
         <h1>Todo MVC</h1>
@@ -33,18 +39,25 @@ class App extends React.Component<AppProps, AppState> {
           completeAll={() => dispatch(completeAllTodos())}
         />
         <TodoList
+          type={visibility}
           todos={todos}
           deleteTodo={todo => dispatch(deleteTodo(todo))}
           completedTodo={todo => dispatch(completeTodo(todo))}
         />
-        <Archive clearCompleted={() => dispatch(clearCompleted())} />
+        <Archive
+          showAll={() => dispatch(showAll())}
+          showActive={() => dispatch(showActive())}
+          showCompleted={() => dispatch(showCompleted())}
+          clearCompleted={() => dispatch(clearCompleted())}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: TodoAppState) => ({
-  todos: state.todos
+  todos: state.todos,
+  visibility: state.visibility
 });
 
 export default connect(mapStateToProps)(App);

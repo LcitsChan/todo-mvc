@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Todo, TodosState } from '../model';
 import TodoItem from './TodoItem';
+import * as VisivilityTypes from '../redux/constants/VisibilityType';
 
 export interface TodoListProps {
+  type: string;
   todos: TodosState;
   deleteTodo: (todo: Todo) => void;
   completedTodo: (todo: Todo) => void;
@@ -12,10 +14,19 @@ export interface TodoListState {}
 
 class TodoList extends React.Component<TodoListProps, TodoListState> {
   render() {
-    const { deleteTodo, completedTodo, todos } = this.props;
+    const { type, deleteTodo, completedTodo, todos } = this.props;
+    let renderTodos = todos;
+    switch (type) {
+      case VisivilityTypes.SHOW_ACTIVE:
+        renderTodos = todos.filter(todo => !todo.completed);
+        break;
+      case VisivilityTypes.SHOW_COMPLETED:
+        renderTodos = todos.filter(todo => todo.completed);
+        break;
+    }
     return (
       <ul>
-        {todos.map(todo => (
+        {renderTodos.map(todo => (
           <TodoItem
             todo={todo}
             deleteTodo={deleteTodo}
